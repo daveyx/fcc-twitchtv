@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devServer: {
@@ -15,6 +16,9 @@ module.exports = {
         test: /\.js$/,
         loaders: ['babel-loader'],
         exclude: /node_modules/
+      }, {
+        test: /\.css/,
+        loader: ExtractTextPlugin.extract("css-loader")
       }
     ]
   },
@@ -23,6 +27,7 @@ module.exports = {
     filename: 'js/bundle.min.js'
   },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new ExtractTextPlugin("css/styles.css")
   ]
 };
