@@ -20,5 +20,9 @@
     "react-dom": "^15.4.2",
     "webpack": "^2.3.2",
     "webpack-dev-server": "^2.4.2"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/daveyx/fcc-twitchtv"
   }
 }
