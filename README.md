@@ -11,7 +11,7 @@
 https://www.freecodecamp.com/challenges/use-the-twitchtv-json-api
 
 ### live demo
-TBC
+https://daveyx.github.io/fcc-twitchtv/
 
 ### view at codepen
 TBC
