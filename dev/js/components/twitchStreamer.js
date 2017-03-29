@@ -14,7 +14,7 @@ export default class TwitchStreamer extends React.Component {
     return(
       <Row className="is-table-row">
         <Col xs={4} sm={2} className="is-table-col">
-          <Image src={this.props.img} responsive />
+          {this.props.img ? <Image src={this.props.img} responsive /> : null}
         </Col>
         <Col xs={8} sm={10} className="is-table-col">
           <Row>
@@ -22,7 +22,7 @@ export default class TwitchStreamer extends React.Component {
                 <p className="">{this.props.name} ({this.props.user})</p>
             </Col>
             <Col xs={12} sm={8} className="inner">
-              <p><strong>{this.props.game}</strong><br />{this.props.status}</p>
+              <p><strong>{this.props.game}</strong> {this.props.status}</p>
             </Col>
           </Row>
         </Col>
