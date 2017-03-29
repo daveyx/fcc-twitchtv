@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
 }
+
 body {
   background-color: #46b8da !important;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -17,27 +18,21 @@ body {
   padding-bottom: 20px;
 }
 
-.streamers .row {
+.is-table-row {
   padding-top: 20px;
-  border-bottom: 1px solid grey;
 }
 
-.streamers p {
-  /*position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: 0;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  padding: 10px;*/
+@media only screen and (min-width : 768px) {
+    .is-table-row {
+        display: table;
+    }
+    .is-table-row .is-table-col {
+        float: none;
+        display: table-cell;
+        vertical-align: middle;
+    }
 }
 
-/*.streamers .row {
-    display: table;
+img {
+  margin-left: 10px;
 }
-
-.streamers [class*="col-"] {
-    float: none;
-    display: table-cell;
-    vertical-align: top;
-}*/

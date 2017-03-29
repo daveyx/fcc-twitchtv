@@ -134,7 +134,7 @@ export default class App extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col xs={10} xsOffset={1}>
+            <Col xs={12} md={10} mdOffset={1}>
               <Tabs defaultActiveKey={1} id="tabs">
                 <Tab eventKey={1} title="All" className="streamers">
                   {this.createAllStreamers()}
