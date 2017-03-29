@@ -1,14 +1,39 @@
 html {
   box-sizing: border-box;
-  background-color: #46b8da;
 }
+
 body {
+  background-color: #46b8da !important;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .content {
   background-color: #FFF;
   border-radius: 5px;
   box-shadow: 10px 10px 50px grey;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.is-table-row {
+  padding-top: 20px;
+}
+
+@media only screen and (min-width : 768px) {
+    .is-table-row {
+        display: table;
+        width: 100%;
+    }
+    .is-table-row .is-table-col {
+        float: none;
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+img {
+  margin-left: 10px;
 }
