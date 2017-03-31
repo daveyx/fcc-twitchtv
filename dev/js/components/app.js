@@ -8,8 +8,6 @@ import '../../css/style.css';
 
 let streamers = ["medrybw", "ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "brunofin", "comster404"];
 
-// let streamers = ["ESL_SC2", "medrybw", "freecodecamp"];
-
 let baseUrl = "https://wind-bow.glitch.me/twitch-api";
 
 export default class App extends React.Component {
@@ -32,13 +30,16 @@ export default class App extends React.Component {
 
   testTwitchRequests() {
     // let apiCalls = [this.apiCall("/streams/freecodecamp"), this.apiCall("/users/freecodecamp"), this.apiCall("/channels/freecodecamp")];
-    let apiCalls = [this.apiCall("/streams/ESL_SC2"), this.apiCall("/streams/medrybw")];
+    let apiCalls = [this.apiCall("/users/freecodecamp"), this.apiCall("/users/storbeck"), this.apiCall("/users/brunofin"), this.apiCall("/users/comster404"), ];
 
     let responses = [];
     axios.all(apiCalls).then((responses) => {
       responses.map((response, index) => {
         console.log(JSON.stringify(response.data));
-        console.log("------------------------------------");
+        if (response.data.error) {
+          console.log(index + ": ERROR ---> " + response.data.error);
+          console.log("------------------------------------");
+        }
       })
     }).catch((error) => {
       console.log("error axios: " + error);
@@ -55,7 +56,12 @@ export default class App extends React.Component {
     axios.all(apiCalls).then((responses) => {
       responses.map((response, index) => {
         let currentState = this.state.streamersInfo;
+        let hasAccount = true;
+        if (response.data.error) {
+          hasAccount = false;
+        }
         currentState[index] = {
+          "hasAccount": hasAccount,
           "name": response.data.display_name,
           "user": streamers[index],
           "img": response.data.logo
@@ -78,10 +84,7 @@ export default class App extends React.Component {
     let responses = [];
     axios.all(apiCalls).then((responses) => {
       responses.map((response, index) => {
-        // console.log("responses.map ---> " + JSON.stringify(response.data));
         if (response.data.stream) {
-          console.log("responses.map ---> " + index + ": " + JSON.stringify(response.data.stream.channel.game));
-          console.log("---------------------------------------------");
           let currentState = this.state.streams;
           currentState[index] = {
             "status": response.data.stream.channel.status,
@@ -90,9 +93,10 @@ export default class App extends React.Component {
           this.setState({
             streams: currentState
           });
-        } else {
-          console.log("stream is null for index=" + index);
         }
+        // else {
+        //   console.log("stream is null for index=" + index);
+        // }
       });
     }).catch((error) => {
       console.log("error axios2: " + error);
@@ -106,22 +110,44 @@ export default class App extends React.Component {
 
   createAllStreamers() {
     return this.state.streamersInfo.map((streamer, index) => {
-      let game = "";
-      let status = "offline";
-      if (this.state.streams[index]) {
-        game = this.state.streams[index].game;
-        status = this.state.streams[index].status;
-      }
-      return <TwitchStreamer
-              key={index}
-              name={streamer.name}
-              img={streamer.img}
-              user={streamers[index]}
-              game={game}
-              status={status}
-            />;
-      // return <p key={index}>nothing here</p>;
+      return this.createTwitchStreamerComponent(streamer, index);
     });
+  }
+
+  createOnlineStreamers() {
+    return this.state.streamersInfo.map((streamer, index) => {
+      if ( ! streamer.hasAccount || ! this.state.streams[index]) {
+        return null;
+      }
+      return this.createTwitchStreamerComponent(streamer, index);
+    });
+  }
+
+  createOfflineStreamers() {
+    return this.state.streamersInfo.map((streamer, index) => {
+      if ( ! streamer.hasAccount || this.state.streams[index]) {
+        return null;
+      }
+      return this.createTwitchStreamerComponent(streamer, index);
+    });
+  }
+
+  createTwitchStreamerComponent(streamer, index) {
+    let game = "";
+    let status = "offline";
+    if (this.state.streams[index]) {
+      game = this.state.streams[index].game;
+      status = this.state.streams[index].status;
+    }
+    return <TwitchStreamer
+            key={index}
+            name={streamer.name}
+            img={streamer.img}
+            user={streamers[index]}
+            game={game}
+            status={status}
+            hasAccount={streamer.hasAccount}
+          />;
   }
 
   render() {
@@ -140,10 +166,10 @@ export default class App extends React.Component {
                   {this.createAllStreamers()}
                 </Tab>
                 <Tab eventKey={2} title="Online">
-                  Tab 2 content
+                  {this.createOnlineStreamers()}
                 </Tab>
                 <Tab eventKey={3} title="Offline">
-                  Tab 3 content
+                  {this.createOfflineStreamers()}
                 </Tab>
               </Tabs>
             </Col>
