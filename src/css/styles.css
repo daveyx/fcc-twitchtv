@@ -3,19 +3,8 @@ html {
 }
 
 body {
-  background-color: #46b8da !important;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.content {
-  background-color: #FFF;
-  border-radius: 5px;
-  box-shadow: 10px 10px 50px grey;
-  padding-top: 10px;
-  padding-bottom: 20px;
 }
 
 .is-table-row {
@@ -31,6 +20,18 @@ body {
         float: none;
         display: table-cell;
         vertical-align: middle;
+    }
+    body {
+      background-color: #46b8da !important;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    .content {
+      background-color: #FFF;
+      border-radius: 5px;
+      box-shadow: 10px 10px 50px grey;
+      padding-top: 10px;
+      padding-bottom: 20px;
     }
 }
 
