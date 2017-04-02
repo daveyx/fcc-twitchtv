@@ -35,6 +35,10 @@ body {
     }
 }
 
+.row p {
+  margin-top: 5px;
+}
+
 img {
   margin-left: 10px;
 }
