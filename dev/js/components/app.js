@@ -179,6 +179,15 @@ export default class App extends React.Component {
               </Tabs>
             </Col>
             </Row>
+            <Row>
+              <Col xs={12}>
+                <hr />
+                <footer>
+                  Sourcecode at github.com: <a href="https://github.com/daveyx/fcc-twitchtv" title="Sourcecode" target="_blank">click</a><br />
+                Demo at github.com: <a href="https://daveyx.github.io/fcc-twitchtv/" title="Demo" target="_blank">click</a>
+                </footer>
+              </Col>
+            </Row>
         </Grid>
       </div>
     );
