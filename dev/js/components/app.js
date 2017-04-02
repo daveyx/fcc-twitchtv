@@ -161,7 +161,10 @@ export default class App extends React.Component {
         <Grid className="content">
           <Row>
             <Col xs={10} xsOffset={1}>
-              <h1>Free Code Camp - Use the Twitchtv JSON API</h1>
+              <h1>
+                Free Code Camp - Use the Twitchtv JSON API<br />
+                <small>by <a href="http://www.daveyx.ga" target="_blank" title="daveyx">daveyx</a></small>
+              </h1>
             </Col>
           </Row>
           <Row>
