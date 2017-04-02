@@ -10,6 +10,14 @@ export default class TwitchStreamer extends React.Component {
     };
   }
 
+  getLink() {
+    if (this.props.url) {
+      return <p><a href={this.props.url} target="_blank">{this.props.name} ({this.props.user})</a></p>
+    } else {
+      return <p>{this.props.name} ({this.props.user})</p>
+    }
+  }
+
   render() {
     let status;
     if (this.props.hasAccount) {
@@ -25,7 +33,7 @@ export default class TwitchStreamer extends React.Component {
         <Col xs={8} sm={10} className="is-table-col">
           <Row>
             <Col xs={12} sm={4}>
-                <p className="">{this.props.name} ({this.props.user})</p>
+                {this.getLink()}
             </Col>
             <Col xs={12} sm={8}>
               <p><strong>{this.props.game}</strong> {status}</p>

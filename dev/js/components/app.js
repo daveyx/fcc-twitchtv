@@ -86,17 +86,19 @@ export default class App extends React.Component {
       responses.map((response, index) => {
         if (response.data.stream) {
           let currentState = this.state.streams;
+          let url = null;
+          if (response.data.stream.channel) {
+            url = response.data.stream.channel.url;
+          }
           currentState[index] = {
             "status": response.data.stream.channel.status,
-            "game": response.data.stream.channel.game
+            "game": response.data.stream.channel.game,
+            "url": url
           };
           this.setState({
             streams: currentState
           });
         }
-        // else {
-        //   console.log("stream is null for index=" + index);
-        // }
       });
     }).catch((error) => {
       console.log("error axios2: " + error);
@@ -135,9 +137,11 @@ export default class App extends React.Component {
   createTwitchStreamerComponent(streamer, index) {
     let game = "";
     let status = "offline";
+    let url = null;
     if (this.state.streams[index]) {
       game = this.state.streams[index].game;
       status = this.state.streams[index].status;
+      url = this.state.streams[index].url;
     }
     return <TwitchStreamer
             key={index}
@@ -147,6 +151,7 @@ export default class App extends React.Component {
             game={game}
             status={status}
             hasAccount={streamer.hasAccount}
+            url = {url}
           />;
   }
 
